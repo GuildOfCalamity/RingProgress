@@ -1,0 +1,130 @@
+﻿<UserControl
+    x:Class="RingProgressDemo.Controls.AnimatedRing"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:RingProgressDemo.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="AR"
+    d:DesignHeight="50"
+    d:DesignWidth="50"
+    mc:Ignorable="d">
+
+    <FrameworkElement.Resources>
+
+        <CubicEase x:Key="CubicEase" EasingMode="EaseInOut" />
+        <SineEase x:Key="SineEase" EasingMode="EaseInOut" />
+        <QuadraticEase x:Key="QuadraticEase" EasingMode="EaseInOut" />
+        <PowerEase x:Key="PowerEase" EasingMode="EaseInOut" />
+
+        <Storyboard x:Key="StoryboardAngleWithEasing" RepeatBehavior="Forever">
+            <DoubleAnimation
+                EasingFunction="{StaticResource CubicEase}"
+                RepeatBehavior="Forever"
+                Storyboard.TargetName="Circle"
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)"
+                To="360"
+                Duration="0:0:2.0" />
+        </Storyboard>
+
+        <Storyboard x:Key="StoryboardAngleWithoutEasing" RepeatBehavior="Forever">
+            <DoubleAnimation
+                RepeatBehavior="Forever"
+                Storyboard.TargetName="Circle"
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)"
+                To="360"
+                Duration="0:0:2.0" />
+        </Storyboard>
+
+    </FrameworkElement.Resources>
+
+    <FrameworkElement.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard x:Name="Storyboard1" Storyboard="{StaticResource StoryboardAngleWithEasing}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
+            <StopStoryboard BeginStoryboardName="Storyboard1" />
+        </EventTrigger>
+    </FrameworkElement.Triggers>
+
+    <Grid>
+        <Grid Width="{Binding ElementName=AR, Path=Width, FallbackValue=50}" Height="{Binding ElementName=AR, Path=Height, FallbackValue=50}">
+            <Ellipse Stroke="#444" StrokeThickness="6" />
+            <Grid x:Name="Circle" RenderTransformOrigin="0.5,0.5">
+                <Grid.CacheMode>
+                    <BitmapCache />
+                </Grid.CacheMode>
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Grid>
+
+                    <!--#region [Leading Arc]-->
+                    <Ellipse StrokeThickness="6">
+                        <Ellipse.OpacityMask>
+                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,.5">
+                                <GradientStop Offset="0.499" Color="#ff000000" />
+                                <GradientStop Offset="0.5" Color="#00000000" />
+                            </LinearGradientBrush>
+                        </Ellipse.OpacityMask>
+                        <Ellipse.Stroke>
+                            <LinearGradientBrush x:Name="leadingArc" StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0.2" Color="#ff4800ff" />
+                                <GradientStop Offset="1" Color="#334800ff" />
+                            </LinearGradientBrush>
+                        </Ellipse.Stroke>
+                    </Ellipse>
+                    <!--#endregion-->
+
+                    <!--#region [Trailing Arc]-->
+                    <Ellipse StrokeThickness="6">
+                        <Ellipse.OpacityMask>
+                            <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,.5">
+                                <GradientStop Offset="0.499" Color="#00000000" />
+                                <GradientStop Offset="0.5" Color="#ff000000" />
+                            </LinearGradientBrush>
+                        </Ellipse.OpacityMask>
+                        <Ellipse.Stroke>
+                            <LinearGradientBrush x:Name="trailingArc" StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0.1" Color="#004800ff" />
+                                <GradientStop Offset="1" Color="#3f4800ff" />
+                            </LinearGradientBrush>
+                        </Ellipse.Stroke>
+                    </Ellipse>
+                    <!--#endregion-->
+
+                    <!--#region [Point Leader]-->
+                    <Ellipse
+                        Width="12"
+                        Height="12"
+                        Margin="0,-3,0,0"
+                        VerticalAlignment="Top"
+                        Fill="#4800ff">
+                        <Ellipse.Effect>
+                            <BlurEffect Radius="3" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                    <Ellipse
+                        Width="6"
+                        Height="6"
+                        Margin="0,0,0,0"
+                        VerticalAlignment="Top"
+                        Fill="#FFFFFF"
+                        Opacity="0.5">
+                        <Ellipse.Effect>
+                            <BlurEffect Radius="2" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                    <!--#endregion-->
+
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
+
