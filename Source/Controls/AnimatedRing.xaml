@@ -10,13 +10,13 @@
     d:DesignWidth="50"
     mc:Ignorable="d">
 
+    <!--#region [This animation is now handled in code-behind]-->
+    <!--
     <FrameworkElement.Resources>
-
         <CubicEase x:Key="CubicEase" EasingMode="EaseInOut" />
         <SineEase x:Key="SineEase" EasingMode="EaseInOut" />
         <QuadraticEase x:Key="QuadraticEase" EasingMode="EaseInOut" />
         <PowerEase x:Key="PowerEase" EasingMode="EaseInOut" />
-
         <Storyboard x:Key="StoryboardAngleWithEasing" RepeatBehavior="Forever">
             <DoubleAnimation
                 EasingFunction="{StaticResource CubicEase}"
@@ -26,7 +26,6 @@
                 To="360"
                 Duration="0:0:2.0" />
         </Storyboard>
-
         <Storyboard x:Key="StoryboardAngleWithoutEasing" RepeatBehavior="Forever">
             <DoubleAnimation
                 RepeatBehavior="Forever"
@@ -35,7 +34,6 @@
                 To="360"
                 Duration="0:0:2.0" />
         </Storyboard>
-
     </FrameworkElement.Resources>
 
     <FrameworkElement.Triggers>
@@ -46,10 +44,22 @@
             <StopStoryboard BeginStoryboardName="Storyboard1" />
         </EventTrigger>
     </FrameworkElement.Triggers>
+    -->
+    <!--#endregion-->
 
-    <Grid>
+    <Grid x:Name="container">
         <Grid Width="{Binding ElementName=AR, Path=Width, FallbackValue=50}" Height="{Binding ElementName=AR, Path=Height, FallbackValue=50}">
-            <Ellipse Stroke="#444" StrokeThickness="6" />
+            <!--#region [Backing Track]-->
+            <Ellipse
+                x:Name="track"
+                Margin="0,1,0,0"
+                Stroke="#444"
+                StrokeThickness="5">
+                <Ellipse.Effect>
+                    <BlurEffect Radius="1" />
+                </Ellipse.Effect>
+            </Ellipse>
+            <!--#endregion-->
             <Grid x:Name="Circle" RenderTransformOrigin="0.5,0.5">
                 <Grid.CacheMode>
                     <BitmapCache />
@@ -63,7 +73,6 @@
                     </TransformGroup>
                 </Grid.RenderTransform>
                 <Grid>
-
                     <!--#region [Leading Arc]-->
                     <Ellipse StrokeThickness="6">
                         <Ellipse.OpacityMask>
@@ -75,12 +84,11 @@
                         <Ellipse.Stroke>
                             <LinearGradientBrush x:Name="leadingArc" StartPoint="0.5,0" EndPoint="0.5,1">
                                 <GradientStop Offset="0.2" Color="#ff4800ff" />
-                                <GradientStop Offset="1" Color="#334800ff" />
+                                <GradientStop Offset="1.0" Color="#334800ff" />
                             </LinearGradientBrush>
                         </Ellipse.Stroke>
                     </Ellipse>
                     <!--#endregion-->
-
                     <!--#region [Trailing Arc]-->
                     <Ellipse StrokeThickness="6">
                         <Ellipse.OpacityMask>
@@ -92,14 +100,14 @@
                         <Ellipse.Stroke>
                             <LinearGradientBrush x:Name="trailingArc" StartPoint="0.5,0" EndPoint="0.5,1">
                                 <GradientStop Offset="0.1" Color="#004800ff" />
-                                <GradientStop Offset="1" Color="#3f4800ff" />
+                                <GradientStop Offset="1.0" Color="#3f4800ff" />
                             </LinearGradientBrush>
                         </Ellipse.Stroke>
                     </Ellipse>
                     <!--#endregion-->
-
                     <!--#region [Point Leader]-->
                     <Ellipse
+                        x:Name="pointLeader"
                         Width="12"
                         Height="12"
                         Margin="0,-3,0,0"
@@ -115,13 +123,12 @@
                         Margin="0,0,0,0"
                         VerticalAlignment="Top"
                         Fill="#FFFFFF"
-                        Opacity="0.5">
+                        Opacity="0.55">
                         <Ellipse.Effect>
-                            <BlurEffect Radius="2" />
+                            <BlurEffect Radius="3" />
                         </Ellipse.Effect>
                     </Ellipse>
                     <!--#endregion-->
-
                 </Grid>
             </Grid>
         </Grid>

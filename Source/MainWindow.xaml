@@ -24,10 +24,16 @@
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="Foreground" Value="{StaticResource NormalBrush}" />
             </Style>
+            <Style TargetType="{x:Type ctrl:GlowDecorator}">
+                <Setter Property="BlurRadius" Value="10" />
+                <Setter Property="CornerRadius" Value="4" />
+                <Setter Property="Opacity" Value="0.8" />
+                <Setter Property="Flood" Value="False" />
+            </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="51" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -35,39 +41,94 @@
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <TextBlock
+        <Grid
             Grid.Row="1"
             Grid.Column="0"
-            Text="Track Ring" />
+            Margin="14">
+            <ctrl:GlowDecorator Color="{StaticResource ShadowLight}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                Text="Track Ring" />
+        </Grid>
         <ctrl:TrackRing
             Grid.Row="2"
             Grid.Column="0"
-            Width="100"
-            Height="100"
+            Width="80"
+            Height="80"
             HorizontalAlignment="Center"
             Foreground="{StaticResource DotsBrush}"
             IsActive="True" />
 
-        <TextBlock
+        <Grid
             Grid.Row="1"
             Grid.Column="1"
-            Text="Animated Ring" />
+            Margin="14">
+            <ctrl:GlowDecorator Color="{StaticResource ShadowLight}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                Text="Animated Ring" />
+        </Grid>
         <ctrl:AnimatedRing
             Grid.Row="2"
             Grid.Column="1"
-            Width="70"
-            Height="70"
-            HorizontalAlignment="Center" />
+            Width="75"
+            Height="75"
+            HorizontalAlignment="Center"
+            Easing="{x:Null}"
+            IsActive="True"
+            RingColor="#7040FF"
+            Time="0:0:1.4"
+            TrackColor="#262626"
+            Visibility="Visible" />
 
-        <TextBlock
+        <Grid
             Grid.Row="1"
             Grid.Column="2"
-            Text="Ring Spinner" />
-        <ctrl:RingSpinner
+            Margin="14">
+            <ctrl:GlowDecorator Color="{StaticResource ShadowLight}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                Text="Animated Ring" />
+        </Grid>
+        <ctrl:AnimatedRing
             Grid.Row="2"
             Grid.Column="2"
+            Width="75"
+            Height="75"
+            HorizontalAlignment="Center"
+            IsActive="True"
+            RingColor="#CCAA00"
+            Time="0:0:1.9"
+            TrackColor="#262626"
+            Visibility="Visible">
+            <ctrl:AnimatedRing.Easing>
+                <SineEase EasingMode="EaseInOut" />
+            </ctrl:AnimatedRing.Easing>
+        </ctrl:AnimatedRing>
+
+        <Grid
+            Grid.Row="1"
+            Grid.Column="3"
+            Margin="14">
+            <ctrl:GlowDecorator Color="{StaticResource ShadowLight}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                Text="Ring Spinner" />
+        </Grid>
+        <ctrl:RingSpinner
+            Grid.Row="2"
+            Grid.Column="3"
             Width="80"
             Height="40"
             HorizontalAlignment="Center"
@@ -76,13 +137,20 @@
             RingRatio="3"
             RingThickness="3" />
 
-        <TextBlock
+        <Grid
             Grid.Row="1"
-            Grid.Column="3"
-            Text="Ring Spinner" />
+            Grid.Column="4"
+            Margin="14">
+            <ctrl:GlowDecorator Color="{StaticResource ShadowLight}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                Text="Ring Spinner" />
+        </Grid>
         <ctrl:RingSpinner
             Grid.Row="2"
-            Grid.Column="3"
+            Grid.Column="4"
             Width="80"
             Height="4"
             HorizontalAlignment="Center"
