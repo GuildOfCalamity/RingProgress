@@ -7,8 +7,8 @@
     xmlns:local="clr-namespace:RingProgressDemo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Ring Progress Demo"
-    Width="800"
-    Height="400"
+    Width="920"
+    Height="420"
     Background="{StaticResource BackgroundBrush}"
     Icon="/Assets/AppIcon.png"
     WindowStartupLocation="CenterScreen"
@@ -37,6 +37,7 @@
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
@@ -158,5 +159,31 @@
             RingRadius="2"
             RingRatio="10"
             RingThickness="3" />
+
+        <Grid
+            Grid.Row="1"
+            Grid.Column="5"
+            Margin="14">
+            <ctrl:GlowDecorator Color="{StaticResource ShadowLight}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                Text="Dot Animation" />
+        </Grid>
+        <!--
+            This one is not in the ring theme, but I think it should stay in this demo.
+        -->
+        <ctrl:DotAnimation
+            Grid.Row="2"
+            Grid.Column="5"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            DotMinimum="0.5"
+            DotRadius="10"
+            DotSize="20"
+            DotSpacing="9"
+            FillColor="{StaticResource DotsBrushAlt}"
+            IsRunning="True" />
     </Grid>
 </Window>

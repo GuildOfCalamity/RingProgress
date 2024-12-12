@@ -48,15 +48,6 @@
                 </GradientBrush.GradientStops>
             </LinearGradientBrush>
 
-            <LinearGradientBrush x:Key="DotsBrush" StartPoint="0,0" EndPoint="0,1">
-                <GradientBrush.GradientStops>
-                    <GradientStopCollection>
-                        <GradientStop Offset="0.0" Color="#D1EBFF" />
-                        <GradientStop Offset="1.0" Color="#0094FF" />
-                    </GradientStopCollection>
-                </GradientBrush.GradientStops>
-            </LinearGradientBrush>
-
             <LinearGradientBrush x:Key="RingsBrush" StartPoint="0,0.5" EndPoint="0.5,1">
                 <GradientBrush.GradientStops>
                     <GradientStopCollection>
@@ -74,6 +65,22 @@
                     </GradientStopCollection>
                 </GradientBrush.GradientStops>
             </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="DotsBrush" StartPoint="0,0" EndPoint="0,1">
+                <GradientBrush.GradientStops>
+                    <GradientStopCollection>
+                        <GradientStop Offset="0.0" Color="#D1EBFF" />
+                        <GradientStop Offset="1.0" Color="#0094FF" />
+                    </GradientStopCollection>
+                </GradientBrush.GradientStops>
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="DotsBrushAlt" SpreadMethod="Pad" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Offset="0" Color="#FFF0F0" />
+                <GradientStop Offset="0.4" Color="#73002B" />
+                <GradientStop Offset="1" Color="#990042" />
+            </LinearGradientBrush>
+
             <!--#endregion-->
 
         </ResourceDictionary>

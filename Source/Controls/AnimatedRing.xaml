@@ -68,6 +68,11 @@
                     <TransformGroup>
                         <ScaleTransform />
                         <SkewTransform />
+                        <!--
+                            ** NOTE: **
+                            The RotateTransform must remain in this order sequence since we are
+                            targeting the (UIElement.RenderTransform).(TransformGroup.Children)[2]
+                        -->
                         <RotateTransform />
                         <TranslateTransform />
                     </TransformGroup>
